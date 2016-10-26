@@ -24,6 +24,6 @@ gulp.watch('**/*.jsn',function(e){
         }))
         .pipe(gulp.dest(destPath.dir))
         .on('end',function(){
-            console.log(colors.green('babeled'+_path));
+            console.log(colors.green('babeled '+_path));
         });
 });
