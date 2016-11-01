@@ -1,6 +1,6 @@
 {
   "name": "jsn-watch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
@@ -10,7 +10,8 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.6.1",
     "babel-polyfill": "^6.8.0",
-    "yargs": "^4.6.0"
+    "yargs": "^4.6.0",
+    "moment": "^2.15.2"
   },
   "bin": {
     "jsn-watch": "./bin/watch.js"
