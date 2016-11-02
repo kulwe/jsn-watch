@@ -1,6 +1,6 @@
 {
   "name": "jsn-watch",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
