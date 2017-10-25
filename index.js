@@ -11,18 +11,19 @@ var _ = require('lodash');
 var argv = require('yargs').argv;
 
 var dir = argv.dir || './';
-var env = argv.env || {};
-if (argv.node) {
-    env = {
-        targets: {
-            node: _.get(process, 'versions.node')
-        }
-    }
-};
-env = _.defaultsDeep({}, env, {
+
+var nodeVersion=_.get(process, 'versions.node');
+var env = _.defaultsDeep({}, argv.env, {
     debug: true,
-    useBuiltIns: true
+    useBuiltIns: true,
+    targets:{
+        node:nodeVersion
+    }
 });
+if(argv.all){
+    env.targets={};
+}
+
 var babelOptions = {
     presets: [
         [
@@ -38,7 +39,7 @@ var babelOptions = {
             {
                 "helpers": true,
                 "polyfill": false,
-                "regenerator": false
+                "regenerator": true
             }
         ],
         /*            [
@@ -48,11 +49,14 @@ var babelOptions = {
     comments: false
 };
 console.dir(babelOptions, {depth: 5});
-//npm run jsn-watch -- --dir=./ --node --env.targets.node=8.0
+//npm run jsn-watch -- --dir=./ --all --env.targets.node=8.0
 
 var compiles = {};
 var regIgnore = /\bnode_modules[\\/]/i;
 console.log(colors.green('开始监听jsn文件，使用webstorm时默认 ctrl+s 保存后开始转换'));
+if(env.targets.node){
+    console.log(colors.green('当前env.targets.node='+env.targets.node+' 请使用--all或--evn.targets.xx=xx来定义env'));
+}
 console.log(colors.green('如果使用ES6实例方法，请在主main文件中 require(\'babel-polyfill\')'));
 fs.watch(dir, {
     recursive: true
